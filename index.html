@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abhishek Johary - Portfolio</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Alpine.js for interactions -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Fonts: Inter (Sans) and Merriweather (Serif) for that "Academic" look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    },
+                    colors: {
+                        slate: {
+                            850: '#151e2e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Custom scrollbar for a polished feel */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 20px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background-color: #475569;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-slate-800 antialiased dark:bg-slate-900 dark:text-slate-300 transition-colors duration-300" x-data="{ mobileMenuOpen: false, darkMode: localStorage.getItem('theme') === 'dark' }" :class="{ 'dark': darkMode }">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/80 dark:bg-slate-900/90 backdrop-blur-sm border-b border-gray-200 dark:border-slate-800 transition-colors duration-300">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo / Name -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="font-serif font-bold text-xl text-slate-900 dark:text-white tracking-tight hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                        Abhishek Johary
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden sm:flex sm:space-x-8 items-center">
+                    <a href="#about" class="text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors">About</a>
+                    <a href="#experience" class="text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Experience</a>
+                    <a href="#projects" class="text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Projects</a>
+                    <!-- Dark Mode Toggle -->
+                    <button @click="darkMode = !darkMode; localStorage.setItem('theme', darkMode ? 'dark' : 'light')" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors">
+                        <i data-lucide="moon" class="w-5 h-5 block dark:hidden"></i>
+                        <i data-lucide="sun" class="w-5 h-5 hidden dark:block text-yellow-400"></i>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center sm:hidden space-x-4">
+                     <!-- Dark Mode Toggle Mobile -->
+                     <button @click="darkMode = !darkMode; localStorage.setItem('theme', darkMode ? 'dark' : 'light')" class="p-2">
+                        <i data-lucide="moon" class="w-5 h-5 block dark:hidden"></i>
+                        <i data-lucide="sun" class="w-5 h-5 hidden dark:block text-yellow-400"></i>
+                    </button>
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-white focus:outline-none">
+                        <i data-lucide="menu" class="w-6 h-6" x-show="!mobileMenuOpen"></i>
+                        <i data-lucide="x" class="w-6 h-6" x-show="mobileMenuOpen" x-cloak></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div x-show="mobileMenuOpen" x-transition class="sm:hidden bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-800" x-cloak>
+            <div class="pt-2 pb-4 space-y-1 px-4">
+                <a href="#about" @click="mobileMenuOpen = false" class="block py-2 text-base font-medium hover:text-blue-600 dark:hover:text-blue-400">About</a>
+                <a href="#experience" @click="mobileMenuOpen = false" class="block py-2 text-base font-medium hover:text-blue-600 dark:hover:text-blue-400">Experience</a>
+                <a href="#projects" @click="mobileMenuOpen = false" class="block py-2 text-base font-medium hover:text-blue-600 dark:hover:text-blue-400">Projects</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20 space-y-24">
+
+        <!-- Hero Section -->
+        <section id="about" class="animate-fade-in-up">
+            <div class="space-y-6">
+                <h1 class="text-4xl sm:text-5xl font-serif font-bold text-slate-900 dark:text-white leading-tight">
+                    Hello, I'm <span class="text-blue-600 dark:text-blue-400">Abhishek Johary</span>.
+                </h1>
+                <p class="text-lg sm:text-xl leading-relaxed max-w-2xl text-slate-600 dark:text-slate-400">
+                    I am a <span class="font-medium text-slate-900 dark:text-slate-200">Technical Project Manager</span> and <span class="font-medium text-slate-900 dark:text-slate-200">Software Architect</span> specializing in embedded systems and automotive technology.
+                </p>
+                <p class="text-lg leading-relaxed max-w-2xl text-slate-600 dark:text-slate-400">
+                    With extensive experience at leading tech organizations like NXP, Eaton, and Wipro, I bridge the gap between complex engineering challenges and strategic project execution. My work focuses on delivering robust software solutions for the automotive and industrial sectors.
+                </p>
+                
+                <!-- Social Links -->
+                <div class="flex space-x-6 pt-4">
+                    <a href="https://www.linkedin.com/in/abhishek-johary/" target="_blank" class="group flex items-center space-x-2 text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">
+                        <i data-lucide="linkedin" class="w-5 h-5"></i>
+                        <span class="text-sm font-medium">LinkedIn</span>
+                    </a>
+                    <a href="mailto:abhishek.johary@example.com" class="group flex items-center space-x-2 text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">
+                        <i data-lucide="mail" class="w-5 h-5"></i>
+                        <span class="text-sm font-medium">Email</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="scroll-mt-24">
+            <h2 class="text-2xl font-serif font-bold text-slate-900 dark:text-white mb-8 border-b border-gray-200 dark:border-slate-800 pb-2">Work Experience</h2>
+            
+            <div class="space-y-12">
+                <!-- NXP -->
+                <div class="flex flex-col sm:flex-row gap-4 sm:gap-8">
+                    <div class="sm:w-40 flex-shrink-0">
+                        <div class="text-sm font-mono text-slate-500 dark:text-slate-400">Recent</div>
+                        <div class="mt-1 text-xs font-medium text-blue-600 dark:text-blue-400 uppercase tracking-wide">Semiconductors</div>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white">Technical Project Manager</h3>
+                        <div class="text-blue-600 dark:text-blue-400 font-medium mb-3">NXP Semiconductors</div>
+                        <ul class="list-disc list-outside ml-4 space-y-2 text-slate-600 dark:text-slate-400 text-sm leading-relaxed marker:text-slate-400">
+                            <li>Leading cross-functional teams in the delivery of next-generation automotive silicon solutions.</li>
+                            <li>Managing full project lifecycle from requirements gathering to tape-out and post-silicon validation.</li>
+                            <li>Coordinating with global stakeholders to ensure compliance with ISO functional safety standards.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Eaton -->
+                <div class="flex flex-col sm:flex-row gap-4 sm:gap-8">
+                    <div class="sm:w-40 flex-shrink-0">
+                        <div class="text-sm font-mono text-slate-500 dark:text-slate-400">Previous</div>
+                        <div class="mt-1 text-xs font-medium text-blue-600 dark:text-blue-400 uppercase tracking-wide">Power Management</div>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white">Technical Lead</h3>
+                        <div class="text-blue-600 dark:text-blue-400 font-medium mb-3">Eaton</div>
+                        <ul class="list-disc list-outside ml-4 space-y-2 text-slate-600 dark:text-slate-400 text-sm leading-relaxed marker:text-slate-400">
+                            <li>Developed firmware architecture for intelligent power management systems.</li>
+                            <li>Optimized real-time operating system (RTOS) performance for mission-critical industrial applications.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Wipro -->
+                <div class="flex flex-col sm:flex-row gap-4 sm:gap-8">
+                    <div class="sm:w-40 flex-shrink-0">
+                        <div class="text-sm font-mono text-slate-500 dark:text-slate-400">Previous</div>
+                        <div class="mt-1 text-xs font-medium text-blue-600 dark:text-blue-400 uppercase tracking-wide">Consulting</div>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white">Senior Software Engineer</h3>
+                        <div class="text-blue-600 dark:text-blue-400 font-medium mb-3">Wipro Technologies</div>
+                        <ul class="list-disc list-outside ml-4 space-y-2 text-slate-600 dark:text-slate-400 text-sm leading-relaxed marker:text-slate-400">
+                            <li>Contributed to large-scale automotive infotainment projects for European OEMs.</li>
+                            <li>Specialized in C/C++ development and Linux kernel driver integration.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Zensar -->
+                <div class="flex flex-col sm:flex-row gap-4 sm:gap-8">
+                    <div class="sm:w-40 flex-shrink-0">
+                        <div class="text-sm font-mono text-slate-500 dark:text-slate-400">Early Career</div>
+                        <div class="mt-1 text-xs font-medium text-blue-600 dark:text-blue-400 uppercase tracking-wide">IT Services</div>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white">Software Engineer</h3>
+                        <div class="text-blue-600 dark:text-blue-400 font-medium mb-3">Zensar Technologies</div>
+                        <ul class="list-disc list-outside ml-4 space-y-2 text-slate-600 dark:text-slate-400 text-sm leading-relaxed marker:text-slate-400">
+                            <li>Worked on enterprise application development and legacy system modernization.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="scroll-mt-24">
+            <h2 class="text-2xl font-serif font-bold text-slate-900 dark:text-white mb-8 border-b border-gray-200 dark:border-slate-800 pb-2">Technical Projects</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Project Card 1 -->
+                <div class="group bg-white dark:bg-slate-850 rounded-lg border border-gray-200 dark:border-slate-700 p-6 hover:shadow-lg dark:hover:border-blue-500/50 transition-all duration-300">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-blue-600 dark:text-blue-400">
+                            <i data-lucide="cpu" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                        Automotive Gateway ECU
+                    </h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm mb-4 leading-relaxed">
+                        Architected a central gateway ECU for vehicle networking, enabling secure communication between CAN, LIN, and Ethernet domains.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-slate-700 dark:text-slate-300">Embedded C</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-slate-700 dark:text-slate-300">AUTOSAR</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-slate-700 dark:text-slate-300">Functional Safety</span>
+                    </div>
+                </div>
+
+                <!-- Project Card 2 -->
+                <div class="group bg-white dark:bg-slate-850 rounded-lg border border-gray-200 dark:border-slate-700 p-6 hover:shadow-lg dark:hover:border-blue-500/50 transition-all duration-300">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-purple-50 dark:bg-purple-900/20 rounded-lg text-purple-600 dark:text-purple-400">
+                            <i data-lucide="zap" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                        Industrial IoT Sensor Node
+                    </h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm mb-4 leading-relaxed">
+                        Designed a low-power wireless sensor node for predictive maintenance in manufacturing plants, extending battery life by 40%.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-slate-700 dark:text-slate-300">FreeRTOS</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-slate-700 dark:text-slate-300">BLE</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-slate-700 dark:text-slate-300">C++</span>
+                    </div>
+                </div>
+
+                <!-- Project Card 3 -->
+                <div class="group bg-white dark:bg-slate-850 rounded-lg border border-gray-200 dark:border-slate-700 p-6 hover:shadow-lg dark:hover:border-blue-500/50 transition-all duration-300">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-green-50 dark:bg-green-900/20 rounded-lg text-green-600 dark:text-green-400">
+                            <i data-lucide="activity" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
+                        Real-time Diagnostics Tool
+                    </h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm mb-4 leading-relaxed">
+                        Created a PC-based diagnostic tool for calibrating and debugging embedded controllers in the field.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-slate-700 dark:text-slate-300">Python</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-slate-700 dark:text-slate-300">Qt</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-slate-700 dark:text-slate-300">CAN Bus</span>
+                    </div>
+                </div>
+
+                <!-- Project Card 4 -->
+                <div class="group bg-white dark:bg-slate-850 rounded-lg border border-gray-200 dark:border-slate-700 p-6 hover:shadow-lg dark:hover:border-blue-500/50 transition-all duration-300">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-orange-50 dark:bg-orange-900/20 rounded-lg text-orange-600 dark:text-orange-400">
+                            <i data-lucide="server" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
+                        Legacy Migration
+                    </h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm mb-4 leading-relaxed">
+                        Led the migration of a critical legacy codebase to modern standards, improving maintainability and reducing build times.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-slate-700 dark:text-slate-300">Refactoring</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-slate-700 dark:text-slate-300">DevOps</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="border-t border-gray-200 dark:border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-slate-500 dark:text-slate-500">
+            <div class="mb-4 md:mb-0">
+                &copy; <script>document.write(new Date().getFullYear())</script> Abhishek Johary. All rights reserved.
+            </div>
+            <div class="flex space-x-6">
+                <a href="#" class="hover:text-slate-900 dark:hover:text-white transition-colors">Contact</a>
+            </div>
+        </footer>
+
+    </main>
+    
+    <!-- Initialize Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
